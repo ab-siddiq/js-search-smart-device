@@ -6,7 +6,10 @@ const searchPhone = () => {
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
     fetch(url)
         .then(res => res.json())
-        .then(data => displayPhone(data.data))
+        .then(data => 
+                displayPhone(data.data)
+           
+         )
 }
 
 const toggleSpinner = displaySpinner => {
@@ -14,7 +17,7 @@ const toggleSpinner = displaySpinner => {
 }
 
 // pass api data and show in ui
-const displayPhone = (datas) => {
+const displayPhone = (datas,statement) => {
     toggleSpinner("none");
     const cardGroup = document.getElementById('card-group');
     cardGroup.innerHTML = "";
@@ -28,58 +31,121 @@ const displayPhone = (datas) => {
         `;
     }
     // result found block
-    else{
-        for (const key in datas.slice(0,20)) {
+    else {
+        if (datas.length >= 20) {
+            let sliceRange = 20;
+            for (const key in datas.slice(0,sliceRange)) {
 
-            const colDiv = document.createElement('div');
-            const cardDiv = document.createElement('div');
-            const cardBodyDiv = document.createElement('div');
-            const image = document.createElement('img');
-            const phoneBrand = document.createElement('p');
-            const phoneName = document.createElement('p');
-    
-    
-            cardGroup.appendChild(colDiv);
-            colDiv.classList.add("col");
-    
-            colDiv.appendChild(cardDiv);
-            cardDiv.classList.add("card");
-    
-            cardDiv.appendChild(image);
-            image.classList.add("card-img-top", "w-75", "m-auto", "mt-3", "rounded");
-            image.src = datas[key].image;
-    
-            cardDiv.appendChild(cardBodyDiv);
-            cardBodyDiv.classList.add("card-body");
-    
-            cardBodyDiv.innerHTML = `
-                    <span class="d-block text-bold"><strong>Brand:</strong> ${datas[key].brand}</span>
-                    <span class="d-block" ><strong>Model:</strong> ${datas[key].phone_name}</span>
-                    <span class="d-block" ><strong>Details:</strong> ${datas[key].slug}</span>
-                    <br>
-                    <!-- Button trigger modal -->
-                    <button type="button" onclick="seeDetails('${datas[key].slug}')" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">More Details</button>
-    
-      
-                    <!-- Modal -->
-                    <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="phone-name"></h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                const colDiv = document.createElement('div');
+                const cardDiv = document.createElement('div');
+                const cardBodyDiv = document.createElement('div');
+                const image = document.createElement('img');
+                const phoneBrand = document.createElement('p');
+                const phoneName = document.createElement('p');
+        
+        
+                cardGroup.appendChild(colDiv);
+                colDiv.classList.add("col");
+        
+                colDiv.appendChild(cardDiv);
+                cardDiv.classList.add("card");
+        
+                cardDiv.appendChild(image);
+                image.classList.add("card-img-top", "w-75", "m-auto", "mt-3", "rounded");
+                image.src = datas[key].image;
+        
+                cardDiv.appendChild(cardBodyDiv);
+                cardBodyDiv.classList.add("card-body");
+        
+                cardBodyDiv.innerHTML = `
+                        <span class="d-block text-bold"><strong>Brand:</strong> ${datas[key].brand}</span>
+                        <span class="d-block" ><strong>Model:</strong> ${datas[key].phone_name}</span>
+                        <span class="d-block" ><strong>Details:</strong> ${datas[key].slug}</span>
+                        <br>
+                        <!-- Button trigger modal -->
+                        <button type="button" onclick="seeDetails('${datas[key].slug}')" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">More Details</button>
+        
+          
+                        <!-- Modal -->
+                        <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="phone-name"></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body d" id="modal-body">
+                                                    
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
                             </div>
-                            <div class="modal-body d" id="modal-body">
-                                                
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
-                        </div>
-                    </div>
-            `
+                `
+            }
+            const mainContent = document.getElementById("show-more-button");
+            const addMoreButton = document.createElement("button");
+            addMoreButton.innerHTML = "Show More";
+            addMoreButton.classList.add("btn", "btn-primary","m-auto");
+            mainContent.appendChild(addMoreButton);
         }
+        else {
+            for (const key in datas) {
+
+                const colDiv = document.createElement('div');
+                const cardDiv = document.createElement('div');
+                const cardBodyDiv = document.createElement('div');
+                const image = document.createElement('img');
+                const phoneBrand = document.createElement('p');
+                const phoneName = document.createElement('p');
+        
+        
+                cardGroup.appendChild(colDiv);
+                colDiv.classList.add("col");
+        
+                colDiv.appendChild(cardDiv);
+                cardDiv.classList.add("card");
+        
+                cardDiv.appendChild(image);
+                image.classList.add("card-img-top", "w-75", "m-auto", "mt-3", "rounded");
+                image.src = datas[key].image;
+        
+                cardDiv.appendChild(cardBodyDiv);
+                cardBodyDiv.classList.add("card-body");
+        
+                cardBodyDiv.innerHTML = `
+                        <span class="d-block text-bold"><strong>Brand:</strong> ${datas[key].brand}</span>
+                        <span class="d-block" ><strong>Model:</strong> ${datas[key].phone_name}</span>
+                        <span class="d-block" ><strong>Details:</strong> ${datas[key].slug}</span>
+                        <br>
+                        <!-- Button trigger modal -->
+                        <button type="button" onclick="seeDetails('${datas[key].slug}')" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">More Details</button>
+        
+          
+                        <!-- Modal -->
+                        <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="phone-name"></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body d" id="modal-body">
+                                                    
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                `
+            }
+            document.getElementById("show-more-button").style.display = "none";
+        }
+        
         
         
     }
