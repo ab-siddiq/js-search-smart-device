@@ -2,17 +2,20 @@
 function searchPhone() {
     const searchText = document.getElementById("search-feild").value;
     // console.log(searchText);
+    toggleSpinner("block");
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
     fetch(url)
         .then(res => res.json())
         .then(data => displayPhone(data.data))
 }
 
-
+const toggleSpinner = displaySpinner => {
+    document.getElementById("spinner").style.display = displaySpinner;
+}
 
 // pass api data and show in ui
 function displayPhone(datas) {
-
+    toggleSpinner("none");
     const cardGroup = document.getElementById('card-group');
     cardGroup.innerHTML = "";
     // result not found block
