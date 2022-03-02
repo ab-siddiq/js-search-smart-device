@@ -90,27 +90,31 @@ function showDetails(data) {
     for (const key in data) {
         console.log(data[key])
         document.querySelector("#phone-name").innerHTML = data[key].name;
+        let releaseDate = data[key].releaseDate || "Coming soon.."
        const phoneInformation =`
          <strong>Brand: </strong> ${data[key].brand} <br>
          <strong>Model: </strong> ${data[key].slug} <br>
-          <strong>Release date: </strong>${data[key].releaseDate}
+          <strong>Release date: </strong>${releaseDate}
           
         `
         let mainFeatures, othersInformation
         let modalBody = document.querySelector(".modal-body")
         for (const a in data[key].mainFeatures) {
-            console.log("ob of ob", data[key].mainFeatures[a])
-            console.log("a", data[key].mainFeatures.storage)
-            mainFeaturesObj = data[key].mainFeatures[a];
+            
+            let storage = data[key].mainFeatures.storage || "Not available";
+            let display = data[key].mainFeatures.displaySize || "Not available";
+            let chipset = data[key].mainFeatures.chipSet || "Not available";
+            let memory = data[key].mainFeatures.memory || "Not available";
+            let sensors = data[key].mainFeatures.sensors || "Not available";
             
             mainFeatures = `
             <hr>
             <h2>Main feature:</h2> 
-            <strong>Storage:</strong> ${data[key].mainFeatures.storage} <br>
-            <strong>Display:</strong> ${data[key].mainFeatures.displaySize} <br>
-            <strong>Chipset:</strong> ${data[key].mainFeatures.chipSet} <br>
-            <strong>Memory:</strong> ${data[key].mainFeatures.memory} <br>
-            <strong>Censors:</strong> ${data[key].mainFeatures.sensors} 
+            <strong>Storage:</strong> ${storage} <br>
+            <strong>Display:</strong> ${display} <br>
+            <strong>Chipset:</strong> ${chipset} <br>
+            <strong>Memory:</strong> ${memory} <br>
+            <strong>Censors:</strong> ${sensors} 
     
             
             `
@@ -120,16 +124,21 @@ function showDetails(data) {
             console.log("ob of ob", data[key].others[a])
             // console.log("a", data[key].others.storage)
             // mainFeaturesObj = data[key].mainFeatures[a];
-
+            let wlan = data[key].others.WLAN || "Not Available";
+            let bluetooth = data[key].others.Bluetooth || "Not Available";
+            let gps = data[key].others.GPS || "Not Available";
+            let nfc = data[key].others.NFC || "Not Available";
+            let radio = data[key].others.Radio || "Not Available";
+            let usb = data[key].others.USB || "Not Available";
             othersInformation = `
             <hr>
            <h2> Others: </h2> 
-            <strong>WLAN:</strong> ${data[key].others.WLAN} <br>
-            <strong>Bluetooth:</strong> ${data[key].others.Bluetooth} <br>
-            <strong>GPS:</strong> ${data[key].others.GPS} <br>
-            <strong>NFC:</strong> ${data[key].others.NFC} <br>
-            <strong>Radio:</strong> ${data[key].others.Radio}<br>
-            <strong>USB:</strong> ${data[key].others.USB} 
+            <strong>WLAN:</strong> ${wlan} <br>
+            <strong>Bluetooth:</strong> ${bluetooth} <br>
+            <strong>GPS:</strong> ${gps} <br>
+            <strong>NFC:</strong> ${nfc} <br>
+            <strong>Radio:</strong> ${radio}<br>
+            <strong>USB:</strong> ${usb} 
     
             
             `
