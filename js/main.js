@@ -55,7 +55,7 @@ function displayPhone(datas) {
                     <div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h5 class="modal-title" id="">${datas[key].phone_name}</h5>
+                        <h5 class="modal-title" id="phone-name"></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body d" id="modal-body">
@@ -89,6 +89,7 @@ function seeDetails(details) {
 function showDetails(data) {
     for (const key in data) {
         console.log(data[key])
+        document.querySelector("#phone-name").innerHTML = data[key].name;
        const phoneInformation =`
          <strong>Brand: </strong> ${data[key].brand} <br>
          <strong>Model: </strong> ${data[key].slug} <br>
@@ -127,7 +128,7 @@ function showDetails(data) {
             <strong>Bluetooth:</strong> ${data[key].others.Bluetooth} <br>
             <strong>GPS:</strong> ${data[key].others.GPS} <br>
             <strong>NFC:</strong> ${data[key].others.NFC} <br>
-            <strong>Radio:</strong> ${data[key].others.Radio} 
+            <strong>Radio:</strong> ${data[key].others.Radio}<br>
             <strong>USB:</strong> ${data[key].others.USB} 
     
             
