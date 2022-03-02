@@ -1,6 +1,7 @@
+// calling api clicking search button
 function searchPhone() {
     const searchText = document.getElementById("search-feild").value;
-    console.log(searchText);
+    // console.log(searchText);
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
     fetch(url)
         .then(res => res.json())
@@ -8,16 +9,13 @@ function searchPhone() {
 }
 
 
-// const searchPhone = (res) => {
-//     return res;
-// }
-//       console.log(searchPhone)
 
+// pass api data and show in ui
 function displayPhone(datas) {
 
     const cardGroup = document.getElementById('card-group');
     cardGroup.innerHTML = "";
-
+    // result not found block
     if (datas=='') {
         cardGroup.innerHTML = `
         <div class="m-auto">
@@ -26,7 +24,7 @@ function displayPhone(datas) {
         
         `;
     }
-    
+    // result found block
     else{
         for (const key in datas) {
 
@@ -84,6 +82,7 @@ function displayPhone(datas) {
     }
 }
 
+// clicking show details and call api
 function seeDetails(details) {
     const url = `https://openapi.programming-hero.com/api/phone/${details}`;
     fetch(url)
@@ -91,19 +90,21 @@ function seeDetails(details) {
         .then(data => showDetails(data))
 }
 
+// passing api data and show details in ui
 function showDetails(data) {
+    // for phone data
         for (const key in data) {
-            console.log(data[key])
+            // console.log(data[key]);
             document.querySelector("#phone-name").innerHTML = data[key].name;
             let releaseDate = data[key].releaseDate || "Coming soon.."
            const phoneInformation =`
              <strong>Brand: </strong> ${data[key].brand} <br>
              <strong>Model: </strong> ${data[key].slug} <br>
               <strong>Release date: </strong>${releaseDate}
-              
             `
-            let mainFeatures, othersInformation
-            let modalBody = document.querySelector(".modal-body")
+            let mainFeatures, othersInformation;
+            let modalBody = document.querySelector(".modal-body");
+            // access main feature data
             for (const a in data[key].mainFeatures) {
                 
                 let storage = data[key].mainFeatures.storage || "Not available";
@@ -120,13 +121,12 @@ function showDetails(data) {
                 <strong>Chipset:</strong> ${chipset} <br>
                 <strong>Memory:</strong> ${memory} <br>
                 <strong>Censors:</strong> ${sensors} 
-        
                 
                 `
             }
-    
+            // access sensor data
             for (const a in data[key].others) {
-                console.log("ob of ob", data[key].others[a])
+                // console.log("ob of ob", data[key].others[a])
                 // console.log("a", data[key].others.storage)
                 // mainFeaturesObj = data[key].mainFeatures[a];
                 let wlan = data[key].others.WLAN || "Not Available";
@@ -144,11 +144,9 @@ function showDetails(data) {
                 <strong>NFC:</strong> ${nfc} <br>
                 <strong>Radio:</strong> ${radio}<br>
                 <strong>USB:</strong> ${usb} 
-        
-                
                 `
             }
-    
+        // set details information to the modal
             document.querySelector(".modal-body").innerHTML = phoneInformation+ mainFeatures + othersInformation;
             
         }
