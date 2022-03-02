@@ -26,7 +26,7 @@ function displayPhone(datas) {
     }
     // result found block
     else{
-        for (const key in datas) {
+        for (const key in datas.slice(0,20)) {
 
             const colDiv = document.createElement('div');
             const cardDiv = document.createElement('div');
