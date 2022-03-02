@@ -1,5 +1,5 @@
 // calling api clicking search button
-function searchPhone() {
+const searchPhone = () => {
     const searchText = document.getElementById("search-feild").value;
     // console.log(searchText);
     toggleSpinner("block");
@@ -14,7 +14,7 @@ const toggleSpinner = displaySpinner => {
 }
 
 // pass api data and show in ui
-function displayPhone(datas) {
+const displayPhone = (datas) => {
     toggleSpinner("none");
     const cardGroup = document.getElementById('card-group');
     cardGroup.innerHTML = "";
@@ -86,7 +86,7 @@ function displayPhone(datas) {
 }
 
 // clicking show details and call api
-function seeDetails(details) {
+const seeDetails = (details) => {
     const url = `https://openapi.programming-hero.com/api/phone/${details}`;
     fetch(url)
         .then(res => res.json())
@@ -94,7 +94,7 @@ function seeDetails(details) {
 }
 
 // passing api data and show details in ui
-function showDetails(data) {
+const showDetails = (data) => {
     // for phone data
         for (const key in data) {
             // console.log(data[key]);
