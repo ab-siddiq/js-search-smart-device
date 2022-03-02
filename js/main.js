@@ -52,10 +52,10 @@ function displayPhone(datas) {
             cardBodyDiv.classList.add("card-body");
     
             cardBodyDiv.innerHTML = `
-                    <span class="d-block text-bold">Brand: ${datas[key].brand}</span>
-                    <span class="d-block" >Model: ${datas[key].phone_name}</span>
-                    <span class="d-block" >Details: ${datas[key].slug}</span>
-                    
+                    <span class="d-block text-bold"><strong>Brand:</strong> ${datas[key].brand}</span>
+                    <span class="d-block" ><strong>Model:</strong> ${datas[key].phone_name}</span>
+                    <span class="d-block" ><strong>Details:</strong> ${datas[key].slug}</span>
+                    <br>
                     <!-- Button trigger modal -->
                     <button type="button" onclick="seeDetails('${datas[key].slug}')" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">More Details</button>
     
