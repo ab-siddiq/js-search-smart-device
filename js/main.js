@@ -15,6 +15,9 @@ const searchPhone = () => {
 const toggleSpinner = displaySpinner => {
     document.getElementById("spinner").style.display = displaySpinner;
 }
+const toggleShowMore = showMore => {
+    document.getElementById("show-more").style.display = showMore;
+}
 
 // pass api data and show in ui
 const displayPhone = (datas,statement) => {
@@ -85,11 +88,12 @@ const displayPhone = (datas,statement) => {
                         </div>
                 `
             }
-            const mainContent = document.getElementById("show-more-button");
-            const addMoreButton = document.createElement("button");
-            addMoreButton.innerHTML = "Show More";
-            addMoreButton.classList.add("btn", "btn-primary","m-auto");
-            mainContent.appendChild(addMoreButton);
+            // const mainContent = document.getElementById("show-more-button");
+            // const addMoreButton = document.createElement("button");
+            // addMoreButton.innerHTML = "Show More";
+            // addMoreButton.classList.add("btn", "btn-primary","m-auto");
+            // mainContent.appendChild(addMoreButton);
+            toggleShowMore("block");
         }
         else {
             for (const key in datas) {
@@ -143,7 +147,7 @@ const displayPhone = (datas,statement) => {
                         </div>
                 `
             }
-            document.getElementById("show-more-button").style.display = "none";
+            toggleShowMore("none");
         }
         
         
